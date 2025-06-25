@@ -3,99 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>产品名称 - 简介</title>
+    <title>加密资产管理</title>
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --text-color: #333;
+            --muted-color: #7f8c8d;
+            --bg-light: #f8f9fa;
+            --card-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
             line-height: 1.6;
-            color: #333;
+            color: var(--text-color);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            font-weight: 400;
         }
         .navbar {
-            background: #fff;
-            padding: 1rem 5%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: var(--bg-light);
+            padding: 1.5rem 0;
+            box-shadow: none;
+            border-bottom: 1px solid #eaecef;
         }
         .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #2c3e50;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
         }
         .hero {
-            padding: 4rem 5%;
+            padding: 3rem 0;
             text-align: center;
-            background: #f8f9fa;
+            background: transparent;
         }
         .hero h1 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: -0.02em;
         }
         .hero p {
             font-size: 1.2rem;
-            color: #7f8c8d;
+            color: rgba(255,255,255,0.9);
             max-width: 800px;
             margin: 0 auto;
+            font-weight: 300;
         }
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 4rem 5%;
+            grid-template-columns: repeat(4, 1fr); /* 4列水平排列 */
+            gap: 1.5rem; /* 适中的间距 */
+            padding: 3rem 0;
         }
         .feature-card {
-            padding: 2rem;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            overflow: hidden;
         }
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+            background: rgba(255, 255, 255, 0.98);
         }
         .feature-card h3 {
             color: #2c3e50;
             margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .feature-card p {
+            color: #5a6c7d;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+        .feature-card img {
+            max-width: 140%;
+            height: auto;
+            margin: 0 -20% 1rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            filter: brightness(1.05) contrast(1.1);
+        }
+        .feature-card:hover img {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            filter: brightness(1.1) contrast(1.15);
         }
         .footer {
-            background: #2c3e50;
-            color: #fff;
-            padding: 2rem 5%;
+            background: transparent;
+            color: rgba(255,255,255,0.8);
+            padding: 2rem 0;
             text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 3rem;
+            font-weight: 300;
+        }
+        .links {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+        .github-link, .download-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .github-link {
+            background: #24292e;
+            color: white;
+        }
+        .github-link:hover {
+            background: #2f363d;
+            transform: translateY(-2px);
+        }
+        .download-link {
+            background: #0366d6;
+            color: white;
+        }
+        .download-link:hover {
+            background: #0256cc;
+            transform: translateY(-2px);
+        }
+        .download-section {
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .download-section .links {
+            margin-top: 0;
+            gap: 1.5rem;
+        }
+        .download-section .github-link,
+        .download-section .download-link {
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">产品名称</div>
-    </nav>
-
     <section class="hero">
-        <h1>用创新技术解决您的需求</h1>
-        <p>这里是产品的核心价值描述，简洁说明产品能为用户解决的关键问题。</p>
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">加密资产管理</h1>
     </section>
-
     <section class="features">
         <div class="feature-card">
-            <h3>功能一：高效便捷</h3>
-            <p>详细描述功能特点，突出用户使用后的实际收益。</p>
+            <img src="1.jpg" alt="功能一示意图"> 
+            <p>功能一：比特币、以太坊资产管理</p>
         </div>
         <div class="feature-card">
-            <h3>功能二：安全可靠</h3>
-            <p>强调技术保障和数据安全措施，建立用户信任。</p>
+            <img src="2.jpg" alt="功能二示意图"> 
+            <p>功能二：历史资产查看</p>
         </div>
         <div class="feature-card">
-            <h3>功能三：灵活扩展</h3>
-            <p>说明产品的可定制性和未来扩展能力，满足不同场景需求。</p>
+            <img src="3.jpg" alt="功能三示意图">
+            <p>功能三：资产趋势图表</p>
+        </div>
+        <div class="feature-card">
+            <img src="4.jpg" alt="功能四示意图">
+            <p>功能四：比特币地址监控</p>
+        </div>
+    </section>
+
+    <section class="download-section">
+        <div class="container">
+            <div class="links">
+                <a href="https://github.com/10056789/z1" target="_blank" class="github-link">GitHub地址</a>
+                <a href="https://github.com/10056789/z1/releases/download/v0.1/App-v0.1.apk" target="_blank" class="download-link">下载地址</a>
+            </div>
         </div>
     </section>
 
     <footer class="footer">
-        <p>&copy; 2024 产品名称 | 版权所有</p>
+        <p>&copy; 2025 产品名称 | 版权所有</p>
     </footer>
 </body>
 </html>
